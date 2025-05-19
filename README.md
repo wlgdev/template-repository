@@ -12,7 +12,7 @@ links, screenshots, logos, status (green/red), stats
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#desctiption">Description</a>
+      <a href="#description">Description</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
