@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   initialize:
-    if: ${{ !startsWith(github.repository, 'madbuilds/template-') }}
+    if: ${{ !startsWith(github.repository, 'wlgdev/template-') }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
