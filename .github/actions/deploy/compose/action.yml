@@ -358,6 +358,10 @@ runs:
           (
             while IFS= read -r line; do
               [[ -z "\$line" ]] && continue
+              if [[ "\$line" == *"../"* ]]; then
+                echo "SKIP: invalid property - \$line"
+                continue
+              fi
               eval "tokens=(\$line)"
         
               for token in "\${tokens[@]}"; do
