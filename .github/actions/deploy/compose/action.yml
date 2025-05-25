@@ -42,6 +42,9 @@ inputs:
   env:
     required: false
     description: 'list of env variables'
+  joiner_container:
+    required: false
+    description: 'join containers to same network with name'
 
 # ----------------------------------------------------------------------
 
@@ -339,6 +342,20 @@ runs:
                 echo "EXISTED: already in -> $NETWORK_NAME : \$(docker inspect -f '{{.Name}}' \$container)"
               fi
             fi
+          done
+        
+          # Connect specified containers by name to same created network
+          echo "${{ inputs.joiner_container }}" | tr -s '[:space:]' '\n' | while read -r joiner; do
+            [[ -z "\$joiner" ]] && continue
+            for container in \$(docker ps --format '{{.Names}}' | grep "\$joiner"); do
+              ID=\$(docker inspect -f '{{.Id}}' "\$container")
+              if ! docker inspect -f '{{json .NetworkSettings.Networks}}' "\$ID" | grep -q "$NETWORK_NAME"; then
+                docker network connect "$NETWORK_NAME" "\$ID"
+                echo "JOINER(\$joiner) CONNECTED: container to -> $NETWORK_NAME : \$container"
+              else
+                echo "JOINER(\$joiner) EXISTED: already in -> $NETWORK_NAME : \$container"
+              fi
+            done
           done
         EOF
 
