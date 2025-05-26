@@ -10,7 +10,6 @@
   REPOSITORY NAME
 </h1>
 
----
 <p align="center">
    very short (1–2 lines) repository description
 </p>
@@ -55,7 +54,7 @@
 
 ---
 
-## Description
+### Description
 General information about repo
 
 <p align="right">(<a href="#top">back to top</a>)</p>
