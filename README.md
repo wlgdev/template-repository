@@ -1,15 +1,14 @@
 <!--suppress HtmlUnknownAnchorTarget, HtmlDeprecatedAttribute -->
 <div id="top"></div>
 
-
-<h1 align="center">
-  REPOSITORY NAME
-</h1>
 <div align="center">
   <a href="https://github.com/wlgdev/template-repository/actions/workflows/secrets-update.yml">
     <img src="https://github.com/wlgdev/template-repository/actions/workflows/secrets-update.yml/badge.svg" alt="status"/>
   </a>
 </div>
+<h1 align="center">
+  REPOSITORY NAME
+</h1>
 
 ---
 <p align="center">
