@@ -1,11 +1,27 @@
 <!--suppress HtmlUnknownAnchorTarget, HtmlDeprecatedAttribute -->
 <div id="top"></div>
 
-# Repository Name
-repository name here and general info\
-links, screenshots, logos, status (green/red), stats
+
+<h1 align="center">
+  REPOSITORY NAME
+</h1>
+<div align="center">
+  <a href="https://github.com/wlgdev/template-repository/actions/workflows/secrets-update.yml">
+    <img src="https://github.com/wlgdev/template-repository/actions/workflows/secrets-update.yml/badge.svg" alt="status"/>
+  </a>
+</div>
 
 ---
+<p align="center">
+   very short (1–2 lines) repository description
+</p>
+
+<div align="center">
+  <img src="./docs/description.webp" alt="description"/>
+</div>
+<div align="center">
+  📦 :octocat:
+</div>
 
 <!-- TABLE OF CONTENT -->
 <details>
