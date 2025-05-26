@@ -15,10 +15,10 @@
 </p>
 
 <div align="center">
-  <img src="./docs/description.webp" alt="description"/>
+  📦 :octocat:
 </div>
 <div align="center">
-  📦 :octocat:
+  <img src="./docs/description.webp" alt="description"/>
 </div>
 
 <!-- TABLE OF CONTENT -->
@@ -52,9 +52,9 @@
   </ol>
 </details>
 
----
+<br>
 
-### Description
+## Description
 General information about repo
 
 <p align="right">(<a href="#top">back to top</a>)</p>
