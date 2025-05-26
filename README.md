@@ -26,26 +26,26 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#description">📃 Description</a>
+      <a href="#-description">📃 Description</a>
       <ul>
-        <li><a href="#built-with">🛠️ Built With</a></li>
+        <li><a href="#-built-with">Built With</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">🪧 Getting Started</a>
+      <a href="#-getting-started">🪧 Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li>
-      <a href="#how-to-use">⚠️ How to use</a>
+      <a href="#%EF%B8%8F-how-to-use">⚠️ How to use</a>
       <ul>
         <li><a href="#possible-exceptions">Possible Exceptions</a></li>
       </ul>
     </li>
-    <li><a href="#deployment">⬆️ Deployment</a></li>
-    <li><a href="#reference">🔗 Reference</a></li>
+    <li><a href="#%EF%B8%8F-deployment">⬆️ Deployment</a></li>
+    <li><a href="#-reference">🔗 Reference</a></li>
   </ol>
 </details>
 
@@ -56,7 +56,7 @@ General information about repo
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### 🛠️ Built With
+### Built With
 * [language + version](https://example.com)
 * [framework name](https://example.com)
 
