@@ -66,6 +66,9 @@ outputs:
   image-tags:
     description: 'List of comma-separated tags applied to the image'
     value: ${{ steps.meta.outputs.tags }}
+  image-tag:
+    description: 'Single most relevant tag name (not "-latest")'
+    value: ${{ steps.extract.outputs.tag }}
 
 runs:
   using: composite
@@ -150,6 +153,28 @@ runs:
         cache-from: ${{ inputs.cache-from }}
         cache-to: ${{ inputs.cache-to }}
         provenance: false # do not generate manifests images
+
+    - name: Extract relevant tag
+      id: extract
+      shell: bash
+      run: |
+        if [[ "${{ github.event_name }}" == "release" && "${{ github.event.action }}" == "published" ]]; then
+          RELEVANT_TAG=${{ steps.meta.outputs.version }}
+        fi
+        if [[ "${{ github.event_name }}" != "release" && "${{ github.ref_name }}" == "${{ github.event.repository.default_branch }}" ]]; then
+          RELEVANT_TAG=${{ github.event.repository.default_branch }}-${{ steps.variables.outputs.sha }}.${{github.run_number}}
+        fi
+        if [[ "${{ github.event_name }}" != "release" && "${{ github.ref_name }}" != "${{ github.event.repository.default_branch }}" ]]; then
+          RELEVANT_TAG=dev-${{ steps.variables.outputs.branch }}.${{ github.run_number }}
+        fi
+        echo "tag=${RELEVANT_TAG}" >> $GITHUB_OUTPUT
+
+        echo "## 📃 Docker Image summary : ${{ steps.variables.outputs.image-name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- 🏷️ tag: \`ghcr.io/${{ github.repository_owner }}/${{ steps.variables.outputs.image-name }}:${RELEVANT_TAG}\`" >> $GITHUB_STEP_SUMMARY
+        echo "<details><summary><strong>Available tags</strong></summary><pre lang="text"><code>" >> $GITHUB_STEP_SUMMARY
+        echo "digest: @${{ steps.build-and-push.outputs.digest }}" >> $GITHUB_STEP_SUMMARY
+        echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+        echo "</code></pre></details>" >> $GITHUB_STEP_SUMMARY
 
     # image-tags: - must contain all tags of an image to be removed ('master*' - pattern for all tags existed)
     # if the image has: master-123 sha-123 - then image-tags also should mention that (or else nothing deleted)

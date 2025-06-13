@@ -60,6 +60,9 @@ outputs:
   image-tags:
     description: 'List of comma-separated tags applied to the image'
     value: ${{ steps.snapshot.outputs.image-tags }}
+  image-tag:
+    description: 'Single most relevant tag name (not "-latest")'
+    value: ${{ steps.snapshot.outputs.image-tag }}
 
 runs:
   using: composite
