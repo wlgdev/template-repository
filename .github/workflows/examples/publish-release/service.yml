@@ -42,6 +42,7 @@ jobs:
     outputs:
       image-name: ${{ steps.publish.outputs.image-name }}
       image-tags: ${{ steps.publish.outputs.image-tags }}
+      image-tag:  ${{ steps.publish.outputs.image-tag }}
       image-digest: ${{ steps.publish.outputs.image-digest }}
     steps:
       - uses: actions/checkout@v4
@@ -86,4 +87,5 @@ jobs:
           env:
             SERVICE_IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${{ needs.publish-service.outputs.image-name }}
             SERVICE_IMAGE_DIGEST=${{ needs.publish-service.outputs.image-digest }}
+            SERVICE_IMAGE_TAG=${{ needs.publish-service.outputs.image-tag }}
             FOO=BAR
