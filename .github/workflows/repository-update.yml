@@ -8,6 +8,7 @@ on:
 
 env:
   OWNER_NAME: "wlgdev"
+  ADMIN_TEAM: "MLG"
   REPOSITORIES: >
     \"monitor\",
     \"cover\",
@@ -35,6 +36,16 @@ jobs:
         project: ${{ fromJSON(needs.setup.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: grant MLG team Admin Direct Repo Access
+        env:
+          GITHUB_TOKEN: ${{ secrets.WLGDEV_TEMPLATE_SECRETS_SYNC_PAT }}
+        run: |
+          gh api \
+            --method PUT
+            -H "Accept: application/vnd.github+json" \
+            /orgs/${{ env.OWNER_NAME }}/teams/${{ env.ADMIN_TEAM }}/repos/${{ env.OWNER_NAME }}/${{ matrix.project }} \
+            -f permission=admin
 
       - name: update variables
         env:
