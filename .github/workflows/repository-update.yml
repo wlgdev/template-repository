@@ -8,6 +8,7 @@ on:
 
 env:
   OWNER_NAME: "wlgdev"
+  ADMIN_TEAM: "MLG"
   REPOSITORIES: >
     \"monitor\",
     \"cover\",
@@ -36,6 +37,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: grant MLG team Admin Direct Repo Access
+        env:
+          GITHUB_TOKEN: ${{ secrets.WLGDEV_TEMPLATE_SECRETS_SYNC_PAT }}
+        run: |
+          gh api \
+            --method PUT \
+            -H "Accept: application/vnd.github+json" \
+            /orgs/${{ env.OWNER_NAME }}/teams/${{ env.ADMIN_TEAM }}/repos/${{ env.OWNER_NAME }}/${{ matrix.project }} \
+            -f permission=admin
+
       - name: update variables
         env:
           GITHUB_TOKEN: ${{ secrets.WLGDEV_TEMPLATE_SECRETS_SYNC_PAT }}
@@ -63,7 +74,7 @@ jobs:
           gh api --method PUT \
             -H "Accept: application/vnd.github.v3+json" \
             repos/${{ env.OWNER_NAME }}/${{ matrix.project }}/environments/${ENVIRONMENT_NAME} \
-            -f "reviewers[][type]=User" -F "reviewers[][id]=11288889"
+            -f "reviewers[][type]=Team" -F "reviewers[][id]=13041931"
           echo ""
           echo "${ENVIRONMENT_NAME}: set secrets (SSH)"
           gh secret set WLGDEV_SSH_PRIVATE_HOST  --env ${ENVIRONMENT_NAME} --body ${{ secrets.WLGDEV_SSH_PRIVATE_HOST }}  --repo https://github.com/${{ env.OWNER_NAME }}/${{ matrix.project }}
