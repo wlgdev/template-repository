@@ -13,9 +13,7 @@ env:
     \"monitor\",
     \"cover\",
     \"shortener\",
-    
     \"chatplays\",
-    
     \"some-service\" \
 
 jobs:
