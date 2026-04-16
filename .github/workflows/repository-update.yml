@@ -14,6 +14,7 @@ env:
     \"cover\",
     \"shortener\",
     \"chatplays\",
+    \"wlgposter\",
     \"some-service\" \
 
 jobs:
