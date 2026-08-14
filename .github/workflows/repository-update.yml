@@ -15,6 +15,7 @@ env:
     \"shortener\",
     \"chatplays\",
     \"wlgposter\",
+    \"wlg-donation-alerts\",
     \"some-service\" \
 
 jobs:
@@ -86,7 +87,7 @@ jobs:
           ${{ secrets.WLGDEV_SSH_PRIVATE_KEY }}
           EOF
           )
-          
+
           # CREATE TEST        -   DEPLOYMENT ENV (IF NOT EXIST)
           ENVIRONMENT_NAME=TEST
           if gh api repos/${{ env.OWNER_NAME }}/${{ matrix.project }}/environments/${ENVIRONMENT_NAME} --jq '.name' >/dev/null 2>&1; then
@@ -114,7 +115,7 @@ jobs:
           ${{ secrets.WLGDEV_SSH_PRIVATE_KEY }}
           EOF
           )
-          
+
           # SYNC_APP AUTHORIZATION DETAILS SECRETS
           echo "REPOSITORY: set secrets (sync)"
           gh secret set WLGDEV_SYNCAPP_APP_ID        --body ${{ secrets.WLGDEV_SYNCAPP_APP_ID }}        --repo https://github.com/${{ env.OWNER_NAME }}/${{ matrix.project }}
@@ -130,11 +131,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WLGDEV_TEMPLATE_SECRETS_SYNC_PAT }}
         run: |
           WORKFLOW_NAME="repository-init.yml"
-          
+
           echo "CHECK all workflows list"
           WORKFLOW_LIST=$(gh workflow list --json id,state,path --repo ${{ env.OWNER_NAME }}/${{ matrix.project }})
           echo "Workflow list: ${WORKFLOW_LIST}"
-          
+
           if [[ "$WORKFLOW_LIST" == *"${WORKFLOW_NAME}"* ]]; then
             echo "workflow exist - running: ${WORKFLOW_NAME}"
             gh workflow run "${WORKFLOW_NAME}" --repo ${{ env.OWNER_NAME }}/${{ matrix.project }} --ref master
@@ -149,7 +150,7 @@ jobs:
         run: |
           BRANCH_NAME="master"
           RULE_NAME="[RULE] ${BRANCH_NAME}"
-          
+
           echo "Check if rule exist... ${RULE_NAME}"
           EXISTING_RULES=$(gh api \
             -H "Accept: application/vnd.github.v3+json" \
@@ -166,7 +167,7 @@ jobs:
             REQUEST_METHOD=POST
             RULE_ID=""
           fi
-          
+
           # API CALL: https://docs.github.com/ru/rest/repos/rules?#create-a-repository-ruleset
           # bypass_actors org_admin -> 1
           # bypass_actors maintain -> 2
