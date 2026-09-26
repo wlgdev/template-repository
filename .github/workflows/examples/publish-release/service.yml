@@ -45,7 +45,7 @@ jobs:
       image-tag:  ${{ steps.publish.outputs.image-tag }}
       image-digest: ${{ steps.publish.outputs.image-digest }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # compile the project
       # - name: Compile Project
@@ -69,7 +69,7 @@ jobs:
       - publish-service
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: deploy
         id: deploy
         uses: ./.github/actions/deploy/compose/traefik

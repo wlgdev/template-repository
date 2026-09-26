@@ -40,7 +40,7 @@ jobs:
           private_key: ${{ env.SYNC_PRIVATE_KEY }}
 
       - name: checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Ensures full history is available for PR
           token: '${{ steps.auth.outputs.token }}'
